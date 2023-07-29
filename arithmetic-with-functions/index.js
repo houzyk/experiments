@@ -1,48 +1,50 @@
-// Identity Function
+// Utilities
+let amount = 0;
+const tracker = () => {
+  amount = amount + 1;
+}
 
-let count = 0;
+// Identity funcunction
+const Identity = value => value;
 
-const identity = x => {
-  count = count + 1;
-  return x;
-};
-
-// Number 0 - ignores f
-const zero = f => v => v;
+// Number 0 - ignores func
+const zero = func => value => value;
+// zero(tracker)();
 
 // Number 1
-const one = f => v => f(v);
+const one = func => value => func(value);
+// one(tracker)();
 
 // Number 2
-const two = f => v => f(f(v));
+const two = func => value => func(func(value));
+// two(tracker)();
 
 // Number 3
-const three = f => v => f(f(f(v)));
-// three(identity)(() => {});
+const three = func => value => func(func(func(value)));
+// three(tracker)();
 
-// Successor Function
-const successor = (n) => (f) => (v) => f(n(f)(v));
-// successor(two)(identity)()
+// Successor funcunction
+const successor = numeral => func => value => func(numeral(func)(value));
+// successor(two)(tracker)()
 
 // Plus
-const plus = (n1) => (n2) => (f) => (v) => n1(f)(n2(f)(v));
-// plus(successor(one))(successor(one))(identity)(() => {});
+const plus = numeral1 => numeral2 => func => value => numeral1(func)(numeral2(func)(value));
+// plus(successor(one))(successor(one))(tracker)(() => {});
 
 // Multiply
-const multiply = (n1) => (n2) => (f) => (v) => n1(n2(f))(v);
-// multiply(one)(three)(identity)();
+const multiply = numeral1 => numeral2 => func => value => numeral1(numeral2(func))(value);
+// multiply(one)(three)(tracker)();
 
 // exponential
-const exponential = (n1) => (n2) => (f) => (v) => (n2(n1))(f)(v);
-// exponential(three)(two)(identity)();
+const exponential = numeral1 => numeral2 => func => value => (numeral2(numeral1))(func)(value);
+// exponential(three)(two)(tracker)();
 
 // predecessor
-// const predecessor = (n) => (f) => (v) => n(g => h => h(g(f)))(u => v)(u => u);
-// predecessor(two)(identity)();
+const predecessor = numeral => func => value => numeral(g => h => h(g(func)))(u => value)(u => u);
+// predecessor(three)(tracker)();
 
 // ? Minus
-// ! const minus = (n1) => (n2) => (n2(predecessor))(n1);
+// todo const minus = (numeral1) => (numeral2) => func => value => (numeral2(predecessor(numeral1)))(func)(value);
+// minus(one)(two)(tracker)();
 
-// minus(three)(one)(identity)
-
-console.log("Result", count);
+// console.log("Result", amount);
