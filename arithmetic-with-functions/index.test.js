@@ -44,3 +44,45 @@ describe('Nummeral Encodings', () => {
 
 });
 
+describe('Successor Operator', () => {
+
+  beforeEach(() => {
+    callBackCalls = 0;
+  });
+
+  test('Successor of zero <=> 1', () => {
+    successor(zero)(callBack)();
+    expect(callBackCalls).toBe(1);
+  });
+
+  test('Successor of one <=> 2', () => {
+    successor(one)(callBack)();
+    expect(callBackCalls).toBe(2);
+  });
+
+  test('Successor of two <=> 3', () => {
+    successor(two)(callBack)();
+    expect(callBackCalls).toBe(3);
+  });
+
+  test('Successor of three <=> 4', () => {
+    successor(three)(callBack)();
+    expect(callBackCalls).toBe(4);
+  });
+
+  test('Successor of sucessor of zero <=> 2', () => {
+    successor(successor(zero))(callBack)();
+    expect(callBackCalls).toBe(2);
+  });
+
+  test('Successor of sucessor of three <=> 5', () => {
+    successor(successor(three))(callBack)();
+    expect(callBackCalls).toBe(5);
+  });
+
+  test('Successor of sucessor of successor of zero <=> 3', () => {
+    successor(successor(successor(zero)))(callBack)();
+    expect(callBackCalls).toBe(3);
+  });
+
+});
