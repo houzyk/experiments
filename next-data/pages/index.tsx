@@ -4,7 +4,7 @@ import path from 'path';
 export default function Index({ data }) {
   return (
     <>
-      <h1>{data.hmm}</h1>
+      <h1>{data}</h1>
     </>
   );
 }
